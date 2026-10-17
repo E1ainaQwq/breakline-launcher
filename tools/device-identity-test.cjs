@@ -20,6 +20,8 @@ const raw={vendor:'ASUS',model:'VMKHD7219YY8031',hardware:'12345678-1234-5678-9a
  let count=0;const injected=new DeviceIdentity(async()=>{count++;return raw},'win32');await Promise.all([injected.collect(),injected.collect()]);assert.equal(count,1);
  assert.equal((await new DeviceIdentity(async()=>{throw Error('failure')}).collect()).environment,'unavailable');
  let attempts=0;const recoverable=new DeviceIdentity(async()=>{if(++attempts===1)throw Error('transient');return raw},'win32');assert.equal((await recoverable.collect()).environment,'unavailable');assert.equal((await recoverable.collect()).environment,'physical');
- const actual=await new DeviceIdentity().collect();assert.equal(actual.environment,'physical',actual.detail);assert(actual.device.signals.length>=1);
+ const actual=await new DeviceIdentity().collect();
+ if(process.env.GITHUB_ACTIONS==='true')assert.equal(actual.environment,'virtual',actual.detail);
+ else {assert.equal(actual.environment,'physical',actual.detail);assert(actual.device.signals.length>=1);}
  console.log(JSON.stringify({fixtureCasesPassed:true,rawIdentifiersNeverSerialized:true,independentHashesSurviveReinstall:true,physicalHypervisorHostAllowed:true,actualLocalStableSignals:actual.device.signals.length,actualLocalEnvironment:actual.environment}));
 })().catch(e=>{console.error(e.message);process.exitCode=1});
