@@ -1,0 +1,43 @@
+{
+  "name": "delta-launcher",
+  "version": "0.3.54",
+  "private": true,
+  "description": "Delta 服务器启动器：条款前置 + 整合包校验 + 启动/更新（Electron + React + TS）",
+  "homepage": "https://breakline-origin.pages.dev/",
+  "author": "Breakline Team",
+  "main": "out/main/index.js",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "preview": "electron-vite preview",
+    "typecheck": "tsc --noEmit",
+    "test:resources": "node tools/resource-download-test.cjs",
+    "test:cosmetics": "node tools/cosmetic-assets-test.cjs",
+    "test:memory-cleanup": "node tools/memory-cleanup-static-test.cjs",
+    "test:security": "node tools/security-hardening-test.cjs",
+    "test:monitor": "node tools/ac-monitor-test.cjs",
+    "test:device": "node tools/device-identity-test.cjs",
+    "dist": "electron-vite build && electron-builder --win portable",
+    "dist:nsis": "electron-vite build && electron-builder --win nsis",
+    "dist:portable": "electron-vite build && electron-builder --win portable"
+  },
+  "dependencies": {
+    "electron-updater": "^6.3.9",
+    "framer-motion": "^11.15.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.17",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "electron": "^33.3.0",
+    "electron-builder": "^25.1.8",
+    "electron-vite": "^2.3.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.2",
+    "vite": "^5.4.11"
+  }
+}

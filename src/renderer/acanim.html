@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MUGEN AC 启动中</title>
+    <!--
+      独立窗口（屏幕右下角那块浮层）。
+
+      ⚠️ 这一行**必须是 inline 且带 !important**：`styles/index.css` 里给 html/body 写死了
+      深色底（`background: var(--color-delta-bg)`），那是启动器主窗口要的；
+      而这块窗口是**透明**的（`transparent: true`），一旦被刷上不透明底色就会变成
+      桌面上一个黑色方块 —— 而且"右下角浮层"这个形态本身也就没了。
+      html/body/#root 零边距透明，面板自己占满窗口、由主进程把窗口贴到右下角。
+    -->
+    <style>
+      html,
+      body,
+      #root {
+        height: 100%;
+        margin: 0;
+        background: transparent !important;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./acanim.tsx"></script>
+  </body>
+</html>
