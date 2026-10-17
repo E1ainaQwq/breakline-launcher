@@ -23,5 +23,5 @@ const raw={vendor:'ASUS',model:'VMKHD7219YY8031',hardware:'12345678-1234-5678-9a
  const actual=await new DeviceIdentity().collect();
  if(process.env.GITHUB_ACTIONS==='true')assert.equal(actual.environment,'virtual',actual.detail);
  else {assert.equal(actual.environment,'physical',actual.detail);assert(actual.device.signals.length>=1);}
- console.log(JSON.stringify({fixtureCasesPassed:true,rawIdentifiersNeverSerialized:true,independentHashesSurviveReinstall:true,physicalHypervisorHostAllowed:true,actualLocalStableSignals:actual.device.signals.length,actualLocalEnvironment:actual.environment}));
+ console.log(JSON.stringify({fixtureCasesPassed:true,rawIdentifiersNeverSerialized:true,independentHashesSurviveReinstall:true,physicalHypervisorHostAllowed:true,actualLocalStableSignals:actual.device?.signals.length??0,actualLocalEnvironment:actual.environment}));
 })().catch(e=>{console.error(e.message);process.exitCode=1});
